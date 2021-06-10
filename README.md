@@ -1,6 +1,6 @@
 # doughcalc
 
-This is the doughcalc project.
+This is the [doughcalc project](https://doughcalc.herokuapp.com/).
 
 ## Development mode
 
