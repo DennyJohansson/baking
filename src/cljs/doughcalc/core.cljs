@@ -25,8 +25,9 @@
     (:path (reitit/match-by-name router route))))
 
 ;; -------------------------
-; flour, liquid, percentage
+; flour, liquid, percentage, salt
 ; need to calculate the percentage of liquid on base flour
+; same with salt
 (defn calc-perc [{:keys [flour liquid perc] :as data}]
   (let [h (/ flour 100)]
     (if (nil? perc)
@@ -57,15 +58,18 @@
     [:div
      [:h3 "Dough percentage calculator"]
      [:div
-      "flour " (int flour ) "g"
+      "flour: " (int flour ) "g"
       [slider :flour flour 100 2000 :perc]]
      [:div
-      "liquid " (int liquid ) "g"
+      "liquid: " (int liquid ) "g"
       [slider :liquid liquid 30 2000 :perc]]
      [:div
-      "perc: " (int perc) " "
+      "perc: " (int perc) "% "
       [:span {:style {:color color}} diagnose]
-      [slider :perc perc 10 120 :liquid ]]]))
+      [slider :perc perc 10 120 :liquid ]]
+     [:div
+      "salt 2%: " (* 2 (/ flour 100)) "g"]
+     ]))
 
 ;; Page components
 (defn home-page []
