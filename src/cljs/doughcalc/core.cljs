@@ -13,10 +13,6 @@
 (def router
   (reitit/router
    [["/" :index]
-    ; ["/items"
-     ; ["" :items]
-     ; ["/:item-id" :item]]
-    ; ["/about" :about]
     ]))
 
 (defn path-for [route & [params]]
@@ -75,32 +71,8 @@
 (defn home-page []
   (fn []
     [:span.main
-     [:h1 "Welcome to doughcalc"]
+     [:h1 "Dough calc"]
      [perc-component]]))
-
-; (defn items-page []
-  ; (fn []
-    ; [:span.main
-     ; [:h1 "The items of doughcalc"]
-     ; [:ul (map (fn [item-id]
-                 ; [:li {:name (str "item-" item-id) :key (str "item-" item-id)}
-                  ; [:a {:href (path-for :item {:item-id item-id})} "Item: " item-id]])
-               ; (range 1 60))]]))
-
-
-; (defn item-page []
-  ; (fn []
-    ; (let [routing-data (session/get :route)
-          ; item (get-in routing-data [:route-params :item-id])]
-      ; [:span.main
-       ; [:h1 (str "Item " item " of doughcalc")]
-       ; [:p [:a {:href (path-for :items)} "Back to the list of items"]]])))
-
-
-; (defn about-page []
-  ; (fn [] [:span.main
-          ; [:h1 "About doughcalc"]]))
-
 
 ;; -------------------------
 ;; Translate routes -> page components
@@ -108,11 +80,7 @@
 (defn page-for [route]
   (case route
     :index #'home-page
-    ;; :about #'about-page
-    ;; :items #'items-page
-    ;; :item #'item-page
   ))
-
 
 ;; -------------------------
 ;; Page mounting component
@@ -120,7 +88,7 @@
 (defn current-page []
   (fn []
     (let [page (:current-page (session/get :route))]
-      [:div [page]])))
+      [:div {:style {:padding "35px"}} [page]])))
 
 ;; -------------------------
 ;; Initialize app
