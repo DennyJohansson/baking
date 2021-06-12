@@ -31,7 +31,7 @@
       (assoc data :perc (/ liquid h)) 
       (assoc data :liquid (* perc h)))))
 
-(def perc-data (reagent/atom (calc-perc {:flour 1600 :liquid 1200 })))
+(def perc-data (reagent/atom (calc-perc {:flour 1600 :liquid 1200 :sourdough 20 })))
 
 (defn slider [param value min max invalidates]
   [:input {:type "range" :value value :min min :max max
@@ -46,7 +46,7 @@
                                      calc-perc)))))}])
 
 (defn perc-component []
-  (let [{:keys [liquid flour perc]} @perc-data
+  (let [{:keys [liquid flour perc sourdough]} @perc-data
         [color diagnose] (cond
                           (< perc 50) ["orange" "dry"]
                           (< perc 85) ["inherit" "normal"]
@@ -65,7 +65,8 @@
       [:span {:style {:color color}} diagnose]
       [slider :perc perc 10 120 :liquid ]]
      [:div
-      "sourdough 20%: " (* 20 (/ flour 100)) "g"]
+      "sourdough " (int sourdough) "%: " (* sourdough (/ flour 100)) "g"
+      [slider :sourdough sourdough 10 40 :perc]]
      [:div
       "salt 2%: " (* 2 (/ flour 100)) "g"]
      ]))
