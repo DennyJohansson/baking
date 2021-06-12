@@ -24,6 +24,7 @@
 ; flour, liquid, percentage, salt
 ; need to calculate the percentage of liquid on base flour
 ; same with salt
+; and sourdough
 (defn calc-perc [{:keys [flour liquid perc] :as data}]
   (let [h (/ flour 100)]
     (if (nil? perc)
@@ -63,6 +64,8 @@
       "perc: " (int perc) "% "
       [:span {:style {:color color}} diagnose]
       [slider :perc perc 10 120 :liquid ]]
+     [:div
+      "sourdough 20%: " (* 20 (/ flour 100)) "g"]
      [:div
       "salt 2%: " (* 2 (/ flour 100)) "g"]
      ]))
